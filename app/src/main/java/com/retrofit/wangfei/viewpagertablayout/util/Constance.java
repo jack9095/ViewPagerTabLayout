@@ -1,4 +1,4 @@
-package com.retrofit.wangfei.viewpagertablayout;
+package com.retrofit.wangfei.viewpagertablayout.util;
 
  /**
  * Created by Android Studio

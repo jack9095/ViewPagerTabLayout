@@ -26,6 +26,8 @@ import butterknife.OnClick;
  * Time: 9:57
  * QQ: 929728742
  * Description: ViewPager和TabLayout结合使用
+ *
+ * 在有Toolbar控件的xml布局中添加app:layout_scrollFlags="scroll|enterAlways"就可以显示隐藏Toolbar
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,16 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this);
-        mViewpager.setOffscreenPageLimit(3);//设置viewpager预加载页面数
-        mViewpager.setAdapter(sectionsPagerAdapter);  // 给Viewpager设置适配器
-
-        mViewpager.setCurrentItem(1); // 设置当前显示在哪个页面
-
-        mTabLayout.setupWithViewPager(mViewpager);
-
+        initToolbar();
+        initViewPagerAndTabs();
         // AppBar的监听
         appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -66,6 +60,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toolbar.setBackgroundColor(Color.argb((int) (percentage * 255), 19, 121, 214));
             }
         });
+    }
+
+    private void initViewPagerAndTabs() {
+        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this);
+        mViewpager.setOffscreenPageLimit(3);//设置viewpager预加载页面数
+        mViewpager.setAdapter(sectionsPagerAdapter);  // 给Viewpager设置适配器
+//        mViewpager.setCurrentItem(1); // 设置当前显示在哪个页面
+        mTabLayout.setupWithViewPager(mViewpager);
+    }
+
+    /**初始化Toolbar*/
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+        setTitle(getString(R.string.app_name));
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
     }
 
     @Override
@@ -83,15 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.toolbar, R.id.tabs, R.id.container, R.id.fab})
+    @OnClick({R.id.fab})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.toolbar:
-                break;
-            case R.id.tabs:
-                break;
-            case R.id.container:
-                break;
             case R.id.fab:
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

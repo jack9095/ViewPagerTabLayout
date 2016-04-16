@@ -6,14 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.retrofit.wangfei.viewpagertablayout.Constance;
+import com.retrofit.wangfei.viewpagertablayout.util.Constance;
 import com.retrofit.wangfei.viewpagertablayout.R;
 import com.retrofit.wangfei.viewpagertablayout.adapter.MyRecycleViewAdapter;
 import com.rey.material.widget.ProgressView;
@@ -105,10 +104,11 @@ public class HomeFragment extends Fragment {
      * 初始化RecyclerView
      */
     private void initRecyclerView() {
-        recyclerview.setItemAnimator(new DefaultItemAnimator());
-        recyclerview.setHasFixedSize(true);
+//        recyclerview.setItemAnimator(new DefaultItemAnimator());
+//        recyclerview.setHasFixedSize(true);
         mRecycleViewLayoutManager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(mRecycleViewLayoutManager);  // 设置RecycleView，显示是ListView还是gridView还是瀑布流
+
     }
 
     /**下拉刷新*/
